@@ -1,7 +1,7 @@
 {
   "version": 2,
   "functions": {
-    "public/**/*.php": {
+    "api/*.php": {
       "runtime": "vercel-php@0.7.3"
     }
   },
@@ -11,24 +11,8 @@
       "dest": "/public/assets/$1"
     },
     {
-      "src": "/api.php(.*)",
-      "dest": "/public/api.php$1"
-    },
-    {
-      "src": "/checkout.php(.*)",
-      "dest": "/public/checkout.php$1"
-    },
-    {
-      "src": "/track.php(.*)",
-      "dest": "/public/track.php$1"
-    },
-    {
-      "src": "/track-order.php(.*)",
-      "dest": "/public/track-order.php$1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/public/index.php"
+      "dest": "/api/index.php"
     }
   ]
 }
