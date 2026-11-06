@@ -6,3 +6,4 @@ bin/
 # Temporary files
 scratch/
 tmp/
+.vercel

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 700" font-family="Poppins, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <radialGradient id="bg" cx="70%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#FFF1C9"/>
+      <stop offset=".55" stop-color="#FFD27A"/>
+      <stop offset="1" stop-color="#F7A93A"/>
+    </radialGradient>
+    <linearGradient id="honey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFC233"/>
+      <stop offset="1" stop-color="#D9780F"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity=".55"/>
+      <stop offset=".25" stop-color="#fff" stop-opacity=".05"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".25"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#B8763A"/><stop offset="1" stop-color="#8A5122"/>
+    </linearGradient>
+    <pattern id="hex" width="60" height="104" patternUnits="userSpaceOnUse">
+      <path d="M30 0l30 17v35L30 69 0 52V17zM30 69l30 17v35M30 69L0 86v35" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1760" height="700" fill="url(#bg)"/>
+  <g opacity=".5"><g transform="translate(1230 330)" fill="#FFF7DD" opacity=".55">
+    <path d="M0 0L-900-500h160z"/><path d="M0 0L-600 520h-180z"/><path d="M0 0L600-520h180z"/><path d="M0 0L900 300v-160z"/><path d="M0 0L-950 60v-140z"/>
+  </g></g>
+  <rect x="980" y="0" width="780" height="700" fill="url(#hex)"/>
+  <circle cx="1230" cy="380" r="270" fill="#FFF6DA" opacity=".8"/>
+  <circle cx="1230" cy="380" r="330" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-dasharray="4 14"/>
+
+  <!-- honeycomb chunk -->
+  <g transform="translate(1390 470)">
+    <path d="M-10 120c0-60 20-120 90-140s170 10 200 70 0 120-40 140-250 10-250-70z" fill="#E89A1A"/>
+    <g fill="#FFC53D" stroke="#B9690C" stroke-width="4">
+      <path d="M40 30l28 16v32L40 94 12 78V46z"/><path d="M96 30l28 16v32L96 94 68 78V46z"/><path d="M152 30l28 16v32l-28 16-28-16V46z"/>
+      <path d="M68 78l28 16v32l-28 16-28-16V94z"/><path d="M124 78l28 16v32l-28 16-28-16V94z"/><path d="M180 78l28 16v32l-28 16-28-16V94z"/>
+    </g>
+    <path d="M60 150c0 20 6 34 6 44s-12 10-12 0 6-24 6-44z" fill="#E08A10"/>
+  </g>
+
+  <!-- jar -->
+  <g transform="translate(1110 150)">
+    <ellipse cx="120" cy="455" rx="190" ry="26" fill="#9A5A12" opacity=".25"/>
+    <rect x="18" y="40" width="204" height="44" rx="12" fill="#7A4A1E"/>
+    <rect x="18" y="40" width="204" height="14" rx="7" fill="#9B6430"/>
+    <path d="M10 84h220c18 0 30 14 30 32v290c0 30-24 52-54 52H34c-30 0-54-22-54-52V116c0-18 12-32 30-32z" fill="url(#honey)"/>
+    <path d="M10 84h220c18 0 30 14 30 32v290c0 30-24 52-54 52H34c-30 0-54-22-54-52V116c0-18 12-32 30-32z" fill="url(#glass)"/>
+    <path d="M-20 140c40 16 70-6 100 6s60 18 100 2 70 4 80 8" fill="none" stroke="#FFE08A" stroke-width="6" opacity=".7"/>
+    <rect x="-6" y="200" width="252" height="150" rx="12" fill="#FFF8E6"/>
+    <rect x="-6" y="200" width="252" height="150" rx="12" fill="none" stroke="#7A4A1E" stroke-width="3" stroke-dasharray="2 8"/>
+    <text x="120" y="246" text-anchor="middle" font-size="20" font-weight="600" fill="#C2650E" letter-spacing="4">NAHID</text>
+    <text x="120" y="296" text-anchor="middle" font-size="46" font-weight="800" fill="#3B2410">HONEY</text>
+    <text x="120" y="330" text-anchor="middle" font-size="16" font-weight="500" fill="#7A4A1E" letter-spacing="2">RAW · NATURAL</text>
+    <path d="M30 96c-4 40-4 60 6 70" stroke="#fff" stroke-opacity=".7" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <!-- drip over lid -->
+    <path d="M40 84c0 30 14 30 14 54 0 10-14 10-14 0V84zM170 84c0 18 10 22 10 36 0 8-10 8-10 0z" fill="#F2A21A"/>
+  </g>
+
+  <!-- dipper -->
+  <g transform="rotate(-28 1250 150)">
+    <rect x="1240" y="-60" width="22" height="260" rx="11" fill="url(#wood)"/>
+    <g fill="#C9873F" stroke="#8A5122" stroke-width="3">
+      <ellipse cx="1251" cy="210" rx="44" ry="16"/><ellipse cx="1251" cy="240" rx="50" ry="18"/><ellipse cx="1251" cy="270" rx="44" ry="16"/>
+    </g>
+  </g>
+  <path d="M1318 300c-6 40 2 60-2 110" stroke="#F2A21A" stroke-width="12" stroke-linecap="round" fill="none"/>
+
+  <!-- bees -->
+  <g id="bee" transform="translate(1520 180)">
+    <ellipse cx="-10" cy="-16" rx="18" ry="12" fill="#fff" opacity=".85" transform="rotate(-25 -10 -16)"/>
+    <ellipse cx="10" cy="-16" rx="18" ry="12" fill="#fff" opacity=".85" transform="rotate(25 10 -16)"/>
+    <ellipse cx="0" cy="0" rx="26" ry="18" fill="#FFC21A" stroke="#3B2410" stroke-width="3"/>
+    <path d="M-8-17v34M6-17v34" stroke="#3B2410" stroke-width="6"/>
+    <circle cx="24" cy="-4" r="3" fill="#3B2410"/>
+  </g>
+  <path d="M1450 220c-40 30-90 10-120 40" stroke="#3B2410" stroke-width="2" stroke-dasharray="6 8" fill="none" opacity=".5"/>
+
+  <!-- copy -->
+  <g transform="translate(120 0)">
+    <rect x="0" y="150" width="250" height="46" rx="23" fill="#fff" opacity=".85"/>
+    <text x="125" y="181" text-anchor="middle" font-size="20" font-weight="700" fill="#D9731A" letter-spacing="3">100% NATURAL</text>
+    <text x="0" y="300" font-size="96" font-weight="800" fill="#0F2A28" letter-spacing="-2">Pure Raw</text>
+    <text x="0" y="400" font-size="96" font-weight="800" fill="#0F2A28" letter-spacing="-2">Honey</text>
+    <text x="0" y="460" font-size="28" font-weight="500" fill="#5B3A14">Straight from the hive to your home</text>
+    <rect x="0" y="510" width="230" height="66" rx="12" fill="#F28C28"/>
+    <text x="115" y="552" text-anchor="middle" font-size="24" font-weight="700" fill="#fff" letter-spacing="1">SHOP NOW →</text>
+  </g>
+</svg>

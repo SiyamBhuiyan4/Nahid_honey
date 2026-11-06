@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 700" font-family="Poppins, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F2A28"/><stop offset="1" stop-color="#1C4642"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#F28C28" stop-opacity=".55"/><stop offset="1" stop-color="#F28C28" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="clay" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#B9532A"/><stop offset=".45" stop-color="#D8723F"/><stop offset="1" stop-color="#8E3B1C"/>
+    </linearGradient>
+    <linearGradient id="gur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B8641E"/><stop offset="1" stop-color="#7A3A10"/>
+    </linearGradient>
+  </defs>
+  <rect width="1760" height="700" fill="url(#bg)"/>
+  <g fill="#fff" opacity=".6">
+    <circle cx="140" cy="90" r="3"/><circle cx="520" cy="60" r="2"/><circle cx="760" cy="120" r="3"/><circle cx="1640" cy="80" r="2.5"/><circle cx="1500" cy="600" r="2"/><circle cx="900" cy="640" r="2.5"/>
+  </g>
+  <circle cx="1240" cy="380" r="380" fill="url(#glow)"/>
+
+  <!-- palm leaves -->
+  <g fill="none" stroke="#3E8C5A" stroke-width="5" stroke-linecap="round">
+    <path d="M1760 40c-160 20-280 90-360 200"/>
+    <path d="M1700 60l-30-60M1650 70l-40-60M1600 86l-46-56M1550 106l-50-50M1500 132l-56-40M1460 160l-60-30"/>
+    <path d="M1700 60l20 60M1650 70l14 70M1600 86l8 76M1550 106l2 78M1500 132l-4 78M1460 160l-10 74"/>
+  </g>
+
+  <!-- clay pot (hari) -->
+  <g transform="translate(1110 160)">
+    <ellipse cx="140" cy="430" rx="210" ry="26" fill="#000" opacity=".3"/>
+    <path d="M60 40h160c-10 20-12 34 0 50 70 30 120 100 120 180 0 100-90 160-200 160S-60 370-60 270c0-80 50-150 120-180 12-16 10-30 0-50z" fill="url(#clay)"/>
+    <ellipse cx="140" cy="40" rx="90" ry="20" fill="#7C3216"/>
+    <ellipse cx="140" cy="38" rx="70" ry="13" fill="#5A220E"/>
+    <ellipse cx="140" cy="40" rx="62" ry="9" fill="#E9B36A"/>
+    <path d="M-40 250c100 30 260 30 360 0" stroke="#F3C27E" stroke-width="5" fill="none" opacity=".6"/>
+    <path d="M-30 290c100 30 240 30 340 0" stroke="#F3C27E" stroke-width="3" fill="none" opacity=".4" stroke-dasharray="10 10"/>
+    <path d="M10 150c-30 40-30 120 0 170" stroke="#fff" stroke-opacity=".25" stroke-width="16" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- gur blocks (patali) -->
+  <g transform="translate(1390 470)">
+    <ellipse cx="80" cy="120" rx="150" ry="18" fill="#000" opacity=".3"/>
+    <path d="M-40 70c0-30 50-50 110-50s110 20 110 50v30c0 26-50 40-110 40s-110-14-110-40z" fill="url(#gur)"/>
+    <ellipse cx="70" cy="70" rx="110" ry="40" fill="#C7772C"/>
+    <ellipse cx="70" cy="66" rx="80" ry="24" fill="#D88C3E" opacity=".7"/>
+    <path d="M110 10c0-30 40-50 80-50s80 20 80 50v24c0 22-36 34-80 34s-80-12-80-34z" fill="url(#gur)"/>
+    <ellipse cx="190" cy="10" rx="80" ry="30" fill="#C7772C"/>
+  </g>
+  <g transform="translate(1010 520)">
+    <path d="M0 60c0-24 40-40 90-40s90 16 90 40v22c0 20-40 32-90 32S0 102 0 82z" fill="url(#gur)"/>
+    <ellipse cx="90" cy="60" rx="90" ry="32" fill="#C7772C"/>
+  </g>
+
+  <!-- copy -->
+  <g transform="translate(120 0)">
+    <rect x="0" y="150" width="270" height="46" rx="23" fill="#F28C28"/>
+    <text x="135" y="181" text-anchor="middle" font-size="20" font-weight="700" fill="#fff" letter-spacing="3">WINTER SPECIAL</text>
+    <text x="0" y="300" font-size="92" font-weight="800" fill="#fff" letter-spacing="-2">Fresh Date</text>
+    <text x="0" y="398" font-size="92" font-weight="800" fill="#F6B40E" letter-spacing="-2">Palm Jaggery</text>
+    <text x="0" y="458" font-size="28" font-weight="500" fill="#C9DAD7">Made the traditional way, no added sugar</text>
+    <rect x="0" y="510" width="230" height="66" rx="12" fill="#fff"/>
+    <text x="115" y="552" text-anchor="middle" font-size="24" font-weight="700" fill="#0F2A28" letter-spacing="1">ORDER NOW →</text>
+  </g>
+</svg>
