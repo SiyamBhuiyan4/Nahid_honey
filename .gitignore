@@ -1,0 +1,8 @@
+# Binaries and local tools
+bin/
+*.log
+.DS_Store
+
+# Temporary files
+scratch/
+tmp/
