@@ -56,7 +56,7 @@ function create_order_record(array $data, string $source = 'website'): array {
     foreach ($order['items'] ?? [] as $it) {
         $p = store_get('products', $it['id']);
         if ($p && isset($p['stock']) && $p['stock'] !== '' && $p['stock'] !== null) {
-            $left = max(0, (int)$p['stock'] - (int)$it['quantity']);
+            $left = max(0, (int)$p['stock'] - max(0, (int)$it['quantity']));
             store_patch('products', $p['id'], ['stock' => $left, 'in_stock' => $left > 0]);
         }
     }

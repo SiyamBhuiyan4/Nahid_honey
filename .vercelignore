@@ -1,0 +1,12 @@
+# Not uploaded to Vercel (local data, secrets, tools)
+storage/
+backups/
+bin/cloudflared
+scratch/
+tmp/
+.env*
+!.env.example
+*.sqlite
+*.sqlite-*
+*.log
+.DS_Store

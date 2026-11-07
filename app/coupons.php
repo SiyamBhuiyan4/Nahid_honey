@@ -36,7 +36,7 @@ function evaluate_coupon(string $code, float $subtotal, float $deliveryFee): arr
         return ['ok' => false, 'error' => 'Add items worth ' . number_format($min) . ' or more to use this coupon.'];
     }
     $type = $c['type'] ?? 'fixed';
-    $value = (float)($c['value'] ?? 0);
+    $value = max(0, (float)($c['value'] ?? 0));
     $discount = 0.0;
     $free = false;
     if ($type === 'percent') {

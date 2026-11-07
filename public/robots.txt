@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /checkout.php
+Disallow: /order-success.php
+Disallow: /api.php

@@ -1,11 +1,17 @@
-# Binaries and local tools
-bin/
+# Local tools / binaries (project scripts in bin/*.php ARE committed)
+bin/cloudflared
 *.log
 .DS_Store
 
 # Temporary files
 scratch/
 tmp/
-.vercel
+
+# Local data & secrets — never commit
 storage/
+*.sqlite
+*.sqlite-*
+.vercel
 .env*
+!.env.example
+backups/

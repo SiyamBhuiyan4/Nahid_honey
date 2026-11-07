@@ -1,13 +1,35 @@
 {
   "version": 2,
+  "regions": ["fra1"],
   "functions": {
     "api/*.php": {
-      "runtime": "vercel-php@0.7.3"
+      "runtime": "vercel-php@0.7.3",
+      "maxDuration": 30,
+      "excludeFiles": "{storage/**,bin/cloudflared,scratch/**,tmp/**,.vercel/**,.git/**,**/*.sqlite,**/*.sqlite-*,.env*}"
     }
   },
   "routes": [
     {
+      "src": "/(.*)",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+      },
+      "continue": true
+    },
+    {
+      "src": "/admin(?:/.*)?",
+      "headers": {
+        "Cache-Control": "no-store",
+        "X-Frame-Options": "DENY",
+        "X-Robots-Tag": "noindex, nofollow"
+      },
+      "continue": true
+    },
+    {
       "src": "/assets/(.*)",
+      "headers": { "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800" },
       "dest": "/public/assets/$1"
     },
     {

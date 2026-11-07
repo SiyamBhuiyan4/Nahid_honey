@@ -71,6 +71,8 @@ function normalize_product(array $p): array {
         'in_stock'       => ($p['in_stock'] ?? true) !== false,
         'stock'          => isset($p['stock']) && $p['stock'] !== '' ? (int)$p['stock'] : null,
         'sku'            => (string)($p['sku'] ?? ''),
+        'seo_title'      => (string)($p['seo_title'] ?? ''),
+        'seo_description'=> (string)($p['seo_description'] ?? ''),
         'sort_order'     => (int)($p['sort_order'] ?? 0),
         'status'         => (string)($p['status'] ?? 'published'),
         'featured'       => !empty($p['featured']) || !empty($p['top_selling']) || ($p['badge'] ?? '') !== '',
@@ -88,21 +90,50 @@ function all_products(bool $includeHidden = false): array {
     return $list;
 }
 
-/** Categories in the order they first appear in the product list. */
+/**
+ * Categories for the storefront. Uses Admin → Categories (order, visibility,
+ * name, image) when that collection has entries; categories that only exist on
+ * products follow, in the order they first appear. Empty categories are left
+ * out. $SITE['category_images'] stays the fallback icon set.
+ * Returns [slug, name, count, image, is_icon] per category.
+ */
 function categories_from(array $products): array {
     global $SITE;
     $icons = $SITE['category_images'] ?? [];
-    $cats = [];
+    $found = [];
     foreach ($products as $p) {
         if ($p['category'] === '') continue;
         $slug = $p['category_slug'];
-        if (!isset($cats[$slug])) {
-            $cats[$slug] = [
-                'slug' => $slug, 'name' => $p['category'], 'count' => 0,
-                'image' => $icons[$slug] ?? $p['image'], 'is_icon' => isset($icons[$slug]),
-            ];
+        if (!isset($found[$slug])) $found[$slug] = ['name' => $p['category'], 'count' => 0, 'first_image' => $p['image']];
+        $found[$slug]['count']++;
+    }
+
+    $docs = [];
+    try { $docs = store_all('categories'); } catch (\Throwable $e) { $docs = []; }
+    usort($docs, fn($a, $b) => ((int)($a['sort_order'] ?? 0) <=> (int)($b['sort_order'] ?? 0)) ?: strcasecmp((string)($a['name'] ?? ''), (string)($b['name'] ?? '')));
+
+    $cats = [];
+    $add = function (string $slug, string $name, string $image) use (&$cats, $found, $icons) {
+        if ($image !== '') {
+            $isIcon = str_ends_with(strtolower((string)parse_url($image, PHP_URL_PATH)), '.svg');
+        } elseif (isset($icons[$slug])) {
+            $image = $icons[$slug]; $isIcon = true;
+        } else {
+            $image = $found[$slug]['first_image']; $isIcon = false;
         }
-        $cats[$slug]['count']++;
+        $cats[$slug] = ['slug' => $slug, 'name' => $name, 'count' => $found[$slug]['count'], 'image' => $image, 'is_icon' => $isIcon];
+    };
+
+    $listed = [];
+    foreach ($docs as $c) {
+        $slug = (string)($c['id'] ?? '');
+        if ($slug === '') continue;
+        $listed[$slug] = true;
+        if (($c['visible'] ?? true) === false || !isset($found[$slug])) continue;
+        $add($slug, (string)(($c['name'] ?? '') !== '' ? $c['name'] : $found[$slug]['name']), trim((string)($c['image'] ?? '')));
+    }
+    foreach ($found as $slug => $f) {
+        if (!isset($listed[$slug])) $add($slug, $f['name'], '');
     }
     return array_values($cats);
 }

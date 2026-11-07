@@ -19,6 +19,11 @@ const AUTH_TTL = 60 * 60 * 24 * 7; // 7 days
 function app_secret(): string {
     $env = getenv('APP_SECRET');
     if ($env) return $env;
+    if (store_backend() === 'telegram') {
+        // Never store the secret in the channel (anyone with channel/bot access could read it).
+        $tg = require __DIR__ . '/../config/telegram.php';
+        return hash_hmac('sha256', 'nahid-app-secret', (string)($tg['bot_token'] ?? ''));
+    }
     $s = setting('app_secret');
     if (!$s) { $s = bin2hex(random_bytes(32)); setting_set('app_secret', $s); }
     return $s;

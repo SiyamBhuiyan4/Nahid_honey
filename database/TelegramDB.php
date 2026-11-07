@@ -90,7 +90,8 @@ class TelegramDB {
     }
 
     /**
-     * Load JSON collection with local cache fallback
+     * LEGACY (read-only): the old database/*.json files. The live data is in
+     * the store (app/db.php); these files are only the first-run seed.
      */
     public function getCollection(string $name): array {
         $localPath = "{$this->storageDir}/{$name}.json";
@@ -102,64 +103,26 @@ class TelegramDB {
     }
 
     /**
-     * Save collection locally and sync snapshot to Telegram Channel
+     * LEGACY: no longer writes JSON files (they do not persist on Vercel and
+     * would drift from the real store). Kept so old callers do not fatal.
      */
     public function saveCollection(string $name, array $data, bool $syncToTelegram = false): bool {
-        $localPath = "{$this->storageDir}/{$name}.json";
-        $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        $written = file_put_contents($localPath, $json);
-
-        if ($written && $syncToTelegram) {
-            $this->notifyChannel("📦 <b>Database Sync: {$name}</b>\nItems Count: " . count($data) . "\nTimestamp: " . date('Y-m-d H:i:s'));
-        }
-
-        return $written !== false;
+        return false;
     }
 
     /**
-     * Store new Customer Order and broadcast to Telegram
+     * LEGACY: delegates to create_order_record() (app/orders.php) so an order
+     * is never written to the JSON file. New code should call it directly.
      */
     public function createOrder(array $orderData): array {
-        $orders = $this->getCollection('orders');
-        $orderId = 'NH-' . strtoupper(substr(uniqid(), -6));
-        $orderData['order_id'] = $orderId;
-        $orderData['created_at'] = date('Y-m-d H:i:s');
-        $orderData['status'] = 'Processing';
-
-        $orders[] = $orderData;
-        $this->saveCollection('orders', $orders, false);
-
-        // Format Telegram Notification message
-        $itemsText = "";
-        foreach ($orderData['items'] as $item) {
-            $itemsText .= "• {$item['title']} (x{$item['quantity']}) - ৳{$item['price']}\n";
+        if (!function_exists("create_order_record")) {
+            throw new \RuntimeException("Order store unavailable.");
         }
-
-        $msg = "🔔 <b>New Order Received! [{$orderId}]</b>\n\n";
-        $msg .= "👤 <b>Customer:</b> " . htmlspecialchars($orderData['name']) . "\n";
-        $msg .= "📞 <b>Phone:</b> " . htmlspecialchars($orderData['phone']) . "\n";
-        $msg .= "📍 <b>Address:</b> " . htmlspecialchars($orderData['address']) . "\n";
-        $msg .= "🚚 <b>Zone:</b> " . htmlspecialchars($orderData['zone']) . " (৳{$orderData['delivery_fee']})\n";
-        $msg .= "💳 <b>Payment:</b> " . htmlspecialchars($orderData['payment_method']) . "\n\n";
-        $msg .= "🛒 <b>Ordered Items:</b>\n{$itemsText}\n";
-        $msg .= "💰 <b>Total Payable: ৳" . number_format($orderData['total']) . "</b>";
-
-        $this->notifyChannel($msg);
-
-        return $orderData;
+        return create_order_record($orderData, "website");
     }
 
-    /**
-     * Track Order by ID or Phone
-     */
+    /** LEGACY: delegates to find_order_public() (app/orders.php). */
     public function findOrder(string $query): ?array {
-        $orders = $this->getCollection('orders');
-        $query = trim(strtolower($query));
-        foreach (array_reverse($orders) as $order) {
-            if (strtolower($order['order_id']) === $query || strtolower($order['phone']) === $query) {
-                return $order;
-            }
-        }
-        return null;
+        return function_exists("find_order_public") ? find_order_public($query) : null;
     }
 }
