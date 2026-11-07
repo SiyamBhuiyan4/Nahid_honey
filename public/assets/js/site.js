@@ -309,5 +309,15 @@
     upd();
   });
 
+  /* ---------- Public cart API (used by assets/js/pages.js) ---------- */
+  window.NHCart = {
+    add: add, setQty: setQty, remove: remove, lines: lines, subtotal: subtotal, count: count,
+    items: function () { return cart.map(function (r) { return { id: r.id, quantity: r.qty }; }); },
+    clear: function () { cart = []; save(); },
+    open: openCart, close: closeCart, product: product,
+    money: money, esc: esc, toast: toast
+  };
+
   render();
+  document.dispatchEvent(new CustomEvent('nhcart:ready'));
 })();

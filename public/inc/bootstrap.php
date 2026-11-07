@@ -6,9 +6,14 @@ error_reporting(E_ALL & ~E_DEPRECATED);
 ini_set('display_errors', '0');
 
 require_once __DIR__ . '/../../database/TelegramDB.php';
+require_once __DIR__ . '/../../app/db.php';
+require_once __DIR__ . '/../../app/auth.php';
+require_once __DIR__ . '/../../app/orders.php';
+require_once __DIR__ . '/../../app/coupons.php';
 
-$SITE = require __DIR__ . '/../../config/site.php';
-$db = new TelegramDB();
+// config/site.php holds defaults; anything saved in Admin → Settings overrides it.
+$SITE = array_replace(require __DIR__ . '/../../config/site.php', (array)setting('site', []));
+$db = new TelegramDB(); // Telegram channel notifications + media uploads
 
 function e($v): string {
     return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8');
@@ -64,13 +69,23 @@ function normalize_product(array $p): array {
         'description'    => (string)($p['description'] ?? ''),
         'features'       => is_array($p['features'] ?? null) ? $p['features'] : [],
         'in_stock'       => ($p['in_stock'] ?? true) !== false,
+        'stock'          => isset($p['stock']) && $p['stock'] !== '' ? (int)$p['stock'] : null,
+        'sku'            => (string)($p['sku'] ?? ''),
+        'sort_order'     => (int)($p['sort_order'] ?? 0),
+        'status'         => (string)($p['status'] ?? 'published'),
         'featured'       => !empty($p['featured']) || !empty($p['top_selling']) || ($p['badge'] ?? '') !== '',
     ];
 }
 
-function all_products(): array {
-    global $db;
-    return array_map('normalize_product', $db->getCollection('products'));
+/** Products visible on the storefront (drafts/hidden excluded). */
+function all_products(bool $includeHidden = false): array {
+    $rows = store_all('products');
+    if (!$includeHidden) {
+        $rows = array_filter($rows, fn($p) => ($p['status'] ?? 'published') === 'published');
+    }
+    $list = array_map('normalize_product', array_values($rows));
+    usort($list, fn($a, $b) => ($a['sort_order'] <=> $b['sort_order']) ?: ((int)$a['id'] <=> (int)$b['id']));
+    return $list;
 }
 
 /** Categories in the order they first appear in the product list. */

@@ -7,3 +7,5 @@ bin/
 scratch/
 tmp/
 .vercel
+storage/
+.env*
